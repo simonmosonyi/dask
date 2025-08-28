@@ -1,6 +1,6 @@
 ARG REGISTRY=quay.io
 ARG OWNER=jupyter
-ARG BASE_IMAGE=$REGISTRY/$OWNER/base-notebook
+ARG BASE_IMAGE=$REGISTRY/$OWNER/base-notebook:python-3.11.6
 FROM $BASE_IMAGE
 
 USER root
