@@ -1,9 +1,21 @@
-FROM mambaorg/micromamba:1.5.8
-WORKDIR /usr/local/app
+ARG REGISTRY=quay.io
+ARG OWNER=jupyter
+ARG BASE_IMAGE=$REGISTRY/$OWNER/base-notebook
+FROM $BASE_IMAGE
 
-COPY --chown=$MAMBA_USER:$MAMBA_USER environment.yml /tmp/environment.yml
-RUN micromamba env create -y -f /tmp/environment.yml && micromamba clean -a -y
+USER root
 
-ENV MAMBA_DOCKERFILE_ACTIVATE=1
-SHELL ["/bin/bash", "-lc"]
+RUN apt-get update --yes && \
+    apt-get install --yes --no-install-recommends \
+    curl git nano-tiny vim-tiny less && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+
+USER ${NB_UID}
+
+COPY --chown=${NB_UID}:${NB_GID} environment.yaml /tmp/environment.yaml
+RUN mamba env update -n base -f /tmp/environment.yaml && \
+    fix-permissions "${CONDA_DIR}" && \
+    fix-permissions "/home/${NB_USER}"
+
 ENV PATH=/opt/conda/envs/flood/bin:$PATH
