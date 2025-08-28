@@ -10,7 +10,6 @@ RUN apt-get update --yes && \
     curl git nano-tiny vim-tiny less && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
 USER ${NB_UID}
 
 COPY --chown=${NB_UID}:${NB_GID} environment.yaml /tmp/environment.yaml
@@ -18,6 +17,6 @@ RUN mamba env update -n base -f /tmp/environment.yaml && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-ENV PATH=/opt/conda/envs/flood/bin:$PATH
+COPY --chown=${NB_UID}:${NB_GID} workshop.ipynb /home/jovyan/workshop.ipynb
 
-COPY workshop.ipynb /home/workshop.ipynb
+CMD ["jupyter", "lab", "/home/jovyan/workshop.ipynb", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
