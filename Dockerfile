@@ -19,3 +19,5 @@ RUN mamba env update -n base -f /tmp/environment.yaml && \
     fix-permissions "/home/${NB_USER}"
 
 ENV PATH=/opt/conda/envs/flood/bin:$PATH
+
+COPY workshop.ipynb /home/workshop.ipynb
