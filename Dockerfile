@@ -17,6 +17,7 @@ RUN mamba env update -n base -f /tmp/environment.yaml && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-COPY --chown=${NB_UID}:${NB_GID} workshop.ipynb /home/jovyan/workshop.ipynb
+RUN curl -L https://raw.githubusercontent.com/interTwin-eu/dask-flood-mapper/refs/heads/workshop-f/notebooks/workshop.ipynb \
+    -o /home/jovyan/workshop.ipynb
 
 CMD ["jupyter", "lab", "/home/jovyan/workshop.ipynb", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root"]
