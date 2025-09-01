@@ -11,6 +11,11 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+      id-token: wri
+
     steps:
       # Check out the code from the repository
       - name: Checkout code
@@ -34,5 +39,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/dask-flood-mapper-dask:latest
+          tags: ghcr.io/${{ github.repository }}/dask-flood-mapper-dask:latest
           file: dask-flood-mapper-dask/dask.dockerfile
