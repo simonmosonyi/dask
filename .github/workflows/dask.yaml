@@ -35,4 +35,4 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ github.repository }}/dask-flood-mapper:latest
-          file: dask-flood-mapper/Dockerfile
+          file: dask-flood-mapper/dask.dockerfile
