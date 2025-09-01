@@ -1,4 +1,4 @@
-FROM continuumio/miniconda3:23.7.2-0
+FROM continuumio/miniconda3:25.3.1-1
 
 USER root
 
