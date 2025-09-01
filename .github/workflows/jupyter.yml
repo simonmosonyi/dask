@@ -32,7 +32,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ./dask-flood-mapper-jupyter
+          context: .
           push: true
           tags: ghcr.io/${{ github.actor }}/dask-flood-mapper-jupyter:latest
           file: ./dask-flood-mapper-jupyter/jupyter.dockerfile

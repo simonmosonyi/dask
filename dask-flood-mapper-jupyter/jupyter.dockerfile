@@ -12,7 +12,8 @@ RUN apt-get update --yes && \
 
 USER ${NB_UID}
 
-COPY --chown=${NB_UID}:${NB_GID} environment.yaml /tmp/environment.yaml
+COPY --chown=${NB_UID}:${NB_GID} dask-flood-mapper-jupyter/environment.yaml /tmp/environment.yaml
+
 RUN mamba env update -n base -f /tmp/environment.yaml && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
