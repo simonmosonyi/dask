@@ -11,7 +11,7 @@ RUN apt-get update --yes && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
-COPY  environment.yaml /tmp/environment.yaml
+COPY dask-flood-mapper-jupyter/environment.yaml /tmp/environment.yaml
 
 
 #RUN mamba create -n flood-mapper -f /tmp/environment.yaml && \
